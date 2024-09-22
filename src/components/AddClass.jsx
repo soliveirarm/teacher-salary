@@ -1,6 +1,6 @@
-import { CiCirclePlus } from "react-icons/ci"
 import Input from "./Input"
 import Title from "./Title"
+import AddClassBtn from "./AddClassBtn"
 
 function AddClass({
   name,
@@ -39,10 +39,7 @@ function AddClass({
           onChange={setQuantity}
           type="number"
         />
-        <button className="flex center-all gap-2 bg-blue-500 text-white rounded py-2 px-8">
-          <CiCirclePlus size={24} />
-          <span>Adicionar</span>
-        </button>
+        <AddClassBtn />
       </form>
     </div>
   )

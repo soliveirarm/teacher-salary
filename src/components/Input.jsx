@@ -1,14 +1,14 @@
 function Input({ label, id, placeholder, value, onChange, type = "text" }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-slate-600" htmlFor={id}>
+      <label className="input-label" htmlFor={id}>
         {label}
       </label>
       <input
         id={id}
         type={type}
         placeholder={placeholder}
-        className="p-2 bg-transparent border-b-2 border-blue-500 rounded shadow-md"
+        className="input"
         value={value}
         onChange={onChange}
       />

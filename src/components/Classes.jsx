@@ -1,6 +1,7 @@
+import Class from "./Class"
 import Title from "./Title"
 
-function Classes({ classes, hour }) {
+function Classes({ classes, hour, removeClass }) {
   const TOTAL = classes.reduce(
     (acc, { duration, quantity }) => acc + duration * quantity,
     0
@@ -16,17 +17,12 @@ function Classes({ classes, hour }) {
     <section className="flex flex-col gap-2">
       <Title title="Aulas" />
 
-      {classes.map(({ name, quantity, duration }) => (
-        <div
+      {classes.map((classItem, i) => (
+        <Class
           key={crypto.randomUUID()}
-          className="flex justify-between items-center gap-4"
-        >
-          <span>{name}</span>
-          <span>
-            {duration}m x {quantity}
-          </span>
-          <span>{duration * quantity}m</span>
-        </div>
+          {...classItem}
+          removeClass={() => removeClass(i)}
+        />
       ))}
 
       <p className="text-lg font-semibold self-end mt-4">

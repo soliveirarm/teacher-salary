@@ -10,6 +10,14 @@
   @apply bg-gradient-to-br from-white to-slate-50 min-h-screen;
 }
 
-.center-all {
+.center {
   @apply justify-center items-center;
+}
+
+.input {
+  @apply p-2 bg-transparent border-b-2 border-blue-500 rounded shadow-md outline-none focus:border-none focus:ring-2 focus:ring-blue-500;
+}
+
+.input-label {
+  @apply font-medium text-slate-600;
 }
