@@ -10,23 +10,39 @@ export default defineConfig({
       registerType: "autoUpdate",
       manifest: {
         name: "Teacher's Salary",
-        description:
-          "App criado pra calcular o salário de professores de acordo com a hora aula",
-        display: "fullscreen",
-        background_color: "##f8fafc",
-        theme_color: "#3B82F6",
+        short_name: "",
         icons: [
           {
-            src: "favicon.svg",
+            src: "/pwa-192x192.png",
             sizes: "192x192",
-            type: "image/svg",
+            type: "image/png",
+            purpose: "any",
           },
           {
-            src: "favicon.svg",
+            src: "/pwa-512x512.png",
             sizes: "512x512",
-            type: "image/svg",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/pwa-maskable-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "maskable",
+          },
+          {
+            src: "/pwa-maskable-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
           },
         ],
+        start_url: "/",
+        display: "fullscreen",
+        background_color: "#f8fafc",
+        theme_color: "#3B82F6",
+        description:
+          "App criado pra calcular o salário de professores de acordo com a hora aula",
       },
     }),
   ],
