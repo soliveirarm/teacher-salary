@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: Inter, sans-serif;
+}
+
+#root {
+  @apply bg-gradient-to-br from-white to-slate-50 min-h-screen;
+}
+
+.center-all {
+  @apply justify-center items-center;
+}
