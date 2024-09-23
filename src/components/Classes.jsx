@@ -1,7 +1,7 @@
 import Class from "./Class"
 import Title from "./Title"
 
-function Classes({ classes, hour, removeClass }) {
+export default function Classes({ classes, hour, removeClass }) {
   const TOTAL = classes.reduce(
     (acc, { duration, quantity }) => acc + duration * quantity,
     0
@@ -29,11 +29,9 @@ function Classes({ classes, hour, removeClass }) {
         Total: {TOTAL}m = {TOTAL_HOURS.toFixed(2)}h
       </p>
 
-      <p className="text-xl font-bold text-green-600 self-end">
-        Salário: R${SALARY}
+      <p className="text-xl font-bold self-end">
+        Salário: <span className="text-green-600">R${SALARY}</span>
       </p>
     </section>
   )
 }
-
-export default Classes

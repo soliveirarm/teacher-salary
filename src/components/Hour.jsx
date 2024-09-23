@@ -1,4 +1,4 @@
-function Hour({ hour, setHour }) {
+export default function Hour({ hour, setHour }) {
   return (
     <div className="flex flex-col gap-2">
       <label className="input-label" htmlFor="hour">
@@ -8,5 +8,3 @@ function Hour({ hour, setHour }) {
     </div>
   )
 }
-
-export default Hour

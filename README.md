@@ -1,9 +1,9 @@
-# Teacher's Salary
+# Teachers' Salary
+
+> App criado pra calcular o salário de professores de acordo com a hora aula
 
 ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
-> App criado pra calcular o salário de professores de acordo com a hora aula
 
 ## Bibliotecas utilizadas
 
@@ -13,4 +13,8 @@
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Vite](https://vitejs.dev/)
 
-![made-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)
+**OBS**: Também utilizei o [Favicon Generator](https://favicon.inbrowser.app/tools/favicon-generator) para gerar os ícones e o `.webmanifest` para gerar o PWA
+
+<div style="margin: 10px">
+    <img src="http://ForTheBadge.com/images/badges/built-with-love.svg" />
+</div>

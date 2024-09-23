@@ -3,7 +3,7 @@ import { toast } from "react-toastify"
 const toastProperties = {
   toastId: 0,
   position: "bottom-center",
-  autoClose: 2000,
+  autoClose: 1500,
 }
 
 const classAdded = () => {

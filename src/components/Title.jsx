@@ -1,9 +1,7 @@
-function Title({ title }) {
+export default function Title({ title }) {
   return (
-    <h2 className="text-xl mb-4 font-bold border-b border-blue-300 border-dashed py-2">
+    <h2 className="text-xl mb-4 font-bold border-b-2 border-sky-300 border-dotted py-2">
       {title}
     </h2>
   )
 }
-
-export default Title

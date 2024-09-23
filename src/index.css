@@ -14,8 +14,9 @@
   @apply justify-center items-center;
 }
 
-.input {
-  @apply p-2 bg-transparent border-b-2 border-blue-500 rounded shadow-md outline-none focus:border-none focus:ring-2 focus:ring-blue-500;
+.input,
+.select {
+  @apply p-2 bg-transparent border-b-2 border-sky-500 rounded shadow-md outline-none focus:border-none focus:ring-2 focus:ring-sky-500;
 }
 
 .input-label {

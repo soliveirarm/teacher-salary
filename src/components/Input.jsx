@@ -1,4 +1,4 @@
-function Input({ label, id, placeholder, value, onChange, type = "text" }) {
+export default function Input({ label, id, placeholder, value, onChange }) {
   return (
     <div className="flex flex-col gap-2">
       <label className="input-label" htmlFor={id}>
@@ -6,7 +6,6 @@ function Input({ label, id, placeholder, value, onChange, type = "text" }) {
       </label>
       <input
         id={id}
-        type={type}
         placeholder={placeholder}
         className="input"
         value={value}
@@ -15,5 +14,3 @@ function Input({ label, id, placeholder, value, onChange, type = "text" }) {
     </div>
   )
 }
-
-export default Input

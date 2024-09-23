@@ -1,8 +1,9 @@
 import Input from "./Input"
 import Title from "./Title"
 import AddClassBtn from "./AddClassBtn"
+import SelectClass from "./SelectClass"
 
-function AddClass({
+export default function AddClass({
   name,
   quantity,
   duration,
@@ -16,20 +17,13 @@ function AddClass({
       <Title title="Adicionar aula" />
 
       <form onSubmit={handleSubmit} className="flex flex-col flex-wrap gap-4">
-        <Input
-          label="Turma:"
-          placeholder="Progression 2"
-          id="class-label"
-          value={name}
-          onChange={setName}
-        />
+        <SelectClass name={name} setName={setName} />
         <Input
           label="Duração (min):"
           placeholder="Progression 2"
           id="class-duration"
           value={duration}
           onChange={setDuration}
-          type="number"
         />
         <Input
           label="Quantidade de Aulas:"
@@ -37,12 +31,9 @@ function AddClass({
           id="class-quantity"
           value={quantity}
           onChange={setQuantity}
-          type="number"
         />
         <AddClassBtn />
       </form>
     </div>
   )
 }
-
-export default AddClass

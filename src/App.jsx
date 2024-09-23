@@ -11,11 +11,11 @@ import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { classAdded, classNotAdded } from "./toastify"
 
-function App() {
+export default function App() {
   const [classes, setClasses] = useLocalStorage("TS_CLASSES", [])
   const [hour, setHour] = useLocalStorage("TS_HOUR", 30)
 
-  const [name, setName] = useState("")
+  const [name, setName] = useState("Essentials 1")
   const [quantity, setQuantity] = useState(0)
   const [duration, setDuration] = useState(0)
 
@@ -38,6 +38,12 @@ function App() {
     setClasses(newArray)
   }
 
+  const handleInputChange = (e, func) => {
+    const value = +e.target.value
+    if (isNaN(value)) func(0)
+    else func(value)
+  }
+
   return (
     <>
       <Header />
@@ -49,8 +55,8 @@ function App() {
           quantity={quantity}
           duration={duration}
           setName={(e) => setName(e.target.value)}
-          setQuantity={(e) => setQuantity(+e.target.value)}
-          setDuration={(e) => setDuration(+e.target.value)}
+          setQuantity={(e) => handleInputChange(e, setQuantity)}
+          setDuration={(e) => handleInputChange(e, setDuration)}
           handleSubmit={addClass}
         />
 
@@ -60,5 +66,3 @@ function App() {
     </>
   )
 }
-
-export default App
