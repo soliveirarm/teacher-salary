@@ -1,7 +1,8 @@
 import Class from "./Class"
 import Title from "./Title"
+import { PiBroomDuotone } from "react-icons/pi"
 
-export default function Classes({ classes, hour, removeClass }) {
+export default function Classes({ classes, hour, removeClass, clearAll }) {
   const TOTAL = classes.reduce(
     (acc, { duration, quantity }) => acc + duration * quantity,
     0
@@ -16,6 +17,14 @@ export default function Classes({ classes, hour, removeClass }) {
   return (
     <section className="flex flex-col gap-2">
       <Title title="Aulas" />
+
+      <button
+        onClick={clearAll}
+        className="flex gap-2 items-center self-end btn -danger"
+      >
+        <PiBroomDuotone size="18" />
+        Limpar tudo
+      </button>
 
       {classes.map((classItem, i) => (
         <Class

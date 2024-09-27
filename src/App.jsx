@@ -44,6 +44,8 @@ export default function App() {
     else func(value)
   }
 
+  const clearAll = () => setClasses([])
+
   return (
     <>
       <Header />
@@ -60,7 +62,12 @@ export default function App() {
           handleSubmit={addClass}
         />
 
-        <Classes classes={classes} hour={hour} removeClass={removeClass} />
+        <Classes
+          classes={classes}
+          hour={hour}
+          removeClass={removeClass}
+          clearAll={clearAll}
+        />
       </main>
       <ToastContainer />
     </>

@@ -22,3 +22,15 @@
 .input-label {
   @apply font-medium text-slate-600;
 }
+
+.btn {
+  @apply flex center font-semibold gap-2 rounded py-2 px-8 transition hover:scale-105   hover:ring-2;
+
+  &.-accent {
+    @apply bg-sky-500 text-white hover:text-sky-500 hover:ring-sky-500 hover:bg-slate-50;
+  }
+
+  &.-danger {
+    @apply bg-red-500 text-white hover:text-red-500 hover:ring-red-500 hover:bg-slate-50;
+  }
+}
