@@ -1,9 +1,10 @@
-import Input from "./Input"
-import Title from "./Title"
-import AddClassBtn from "./AddClassBtn"
-import SelectClass from "./SelectClass"
+import { Input } from "./Input"
+import { Title } from "./Title"
+import { SelectClass } from "./SelectClass"
 
-export default function AddClass({
+import { RxPlusCircled } from "react-icons/rx"
+
+export function AddClass({
   name,
   quantity,
   duration,
@@ -37,3 +38,10 @@ export default function AddClass({
     </div>
   )
 }
+
+const AddClassBtn = () => (
+  <button className="btn -accent">
+    <RxPlusCircled size={28} />
+    <span>Adicionar</span>
+  </button>
+)

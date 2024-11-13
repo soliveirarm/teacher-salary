@@ -1,9 +1,9 @@
 import { useState } from "react"
 
-import AddClass from "./components/AddClass"
-import Header from "./components/Header"
-import Hour from "./components/Hour"
-import Classes from "./components/Classes"
+import { AddClass } from "./components/AddClass"
+import { Header } from "./components/Header"
+import { Hour } from "./components/Hour"
+import { Classes } from "./components/Classes"
 
 import { useLocalStorage } from "@uidotdev/usehooks"
 
@@ -11,11 +11,11 @@ import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { classAdded, classNotAdded } from "./toastify"
 
-export default function App() {
+export function App() {
   const [classes, setClasses] = useLocalStorage("TS_CLASSES", [])
   const [hour, setHour] = useLocalStorage("TS_HOUR", 30)
 
-  const [name, setName] = useState("Essentials 1")
+  const [name, setName] = useState("")
   const [quantity, setQuantity] = useState(0)
   const [duration, setDuration] = useState(0)
 
@@ -44,8 +44,6 @@ export default function App() {
     else func(value)
   }
 
-  const clearAll = () => setClasses([])
-
   return (
     <>
       <Header />
@@ -62,12 +60,7 @@ export default function App() {
           handleSubmit={addClass}
         />
 
-        <Classes
-          classes={classes}
-          hour={hour}
-          removeClass={removeClass}
-          clearAll={clearAll}
-        />
+        <Classes classes={classes} hour={hour} removeClass={removeClass} />
       </main>
       <ToastContainer />
     </>
