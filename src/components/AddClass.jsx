@@ -40,7 +40,7 @@ export function AddClass({
 }
 
 const AddClassBtn = () => (
-  <button className="btn -accent">
+  <button className="flex center font-semibold gap-2 rounded py-2 px-8 transition hover:scale-105 bg-sky-500 text-white hover:ring-2 hover:text-sky-500 hover:ring-sky-500 hover:bg-slate-50">
     <RxPlusCircled size={28} />
     <span>Adicionar</span>
   </button>

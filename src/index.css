@@ -18,19 +18,3 @@
 .select {
   @apply p-2 bg-transparent border-b-2 border-sky-500 rounded shadow-md outline-none focus:border-none focus:ring-2 focus:ring-sky-500;
 }
-
-.input-label {
-  @apply font-medium text-slate-600;
-}
-
-.btn {
-  @apply flex center font-semibold gap-2 rounded py-2 px-8 transition hover:scale-105;
-
-  &.-accent {
-    @apply bg-sky-500 text-white hover:ring-2 hover:text-sky-500 hover:ring-sky-500 hover:bg-slate-50;
-  }
-
-  &.-danger {
-    @apply border-2 border-red-500 text-red-500 hover:text-white hover:ring-red-500 hover:bg-red-500;
-  }
-}
