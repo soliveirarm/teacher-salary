@@ -9,7 +9,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "Teacher's Salary",
+        name: "Teacher Salary",
         short_name: "",
         icons: [
           {
@@ -38,7 +38,7 @@ export default defineConfig({
           },
         ],
         start_url: "/",
-        display: "fullscreen",
+        display: "standalone",
         background_color: "#f8fafc",
         theme_color: "#3B82F6",
         description:

@@ -1,4 +1,4 @@
-# Teachers' Salary
+# Teacher Salary
 
 > App criado pra calcular o salário de professores de acordo com a hora aula
 
