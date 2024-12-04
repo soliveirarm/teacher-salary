@@ -1,24 +1,21 @@
 import { Input } from "./Input"
 import { Title } from "./Title"
-import { SelectClass } from "./SelectClass"
-
 import { RxPlusCircled } from "react-icons/rx"
 
 export function AddClass({
-  name,
   quantity,
   duration,
-  setName,
   setQuantity,
   setDuration,
   handleSubmit,
+  classNameInput,
 }) {
   return (
     <div>
       <Title title="Adicionar aula" />
 
       <form onSubmit={handleSubmit} className="flex flex-col flex-wrap gap-4">
-        <SelectClass name={name} setName={setName} />
+        {classNameInput}
         <Input
           label="Duração (min):"
           placeholder="Progression 2"

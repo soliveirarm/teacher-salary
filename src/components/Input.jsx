@@ -5,6 +5,7 @@ export function Input({ label, id, placeholder, value, onChange }) {
         {label}
       </label>
       <input
+        name={id}
         id={id}
         placeholder={placeholder}
         className="input"

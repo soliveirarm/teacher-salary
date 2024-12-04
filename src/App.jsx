@@ -1,35 +1,43 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { AddClass } from "./components/AddClass"
 import { Header } from "./components/Header"
-import { Hour } from "./components/Hour"
+import { ValuePerHour } from "./components/ValuePerHour"
 import { Classes } from "./components/Classes"
+import { ClassName } from "./components/ClassName"
 
 import { useLocalStorage } from "@uidotdev/usehooks"
 
-import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import { classAdded, classNotAdded } from "./toastify"
+import { ToastContainer } from "react-toastify"
+import { classAddedToast, classNotAddedToast } from "./toastify"
 
 export function App() {
   const [classes, setClasses] = useLocalStorage("TS_CLASSES", [])
   const [hour, setHour] = useLocalStorage("TS_HOUR", 30)
+  const [savedClasses, setSavedClasses] = useLocalStorage(
+    "TS_SAVED_CLASSES",
+    []
+  )
 
   const [name, setName] = useState("")
   const [quantity, setQuantity] = useState(0)
   const [duration, setDuration] = useState(0)
 
+  const [classIsSaved, setClassIsSaved] = useState(false)
+
   const addClass = (e) => {
     e.preventDefault()
+
     if (name && duration && quantity) {
       setClasses([...classes, { name, duration, quantity }])
       setName("")
       setQuantity(0)
       setDuration(0)
       window.navigator.vibrate(50)
-      classAdded()
+      classAddedToast()
     } else {
-      classNotAdded()
+      classNotAddedToast()
     }
   }
 
@@ -38,29 +46,57 @@ export function App() {
     setClasses(newArray)
   }
 
-  const handleInputChange = (e, func) => {
+  const handleNumberInputChange = (e, setFunc) => {
     const value = +e.target.value
-    if (isNaN(value)) func(0)
-    else func(value)
+    if (isNaN(value)) setFunc(0)
+    else setFunc(value)
   }
+
+  const saveClassToggle = () => {
+    if (!name) return
+
+    const filteredSavedClasses = savedClasses.filter(
+      (savedClass) => savedClass !== name
+    )
+
+    if (!classIsSaved) setSavedClasses([...savedClasses, name])
+    else setSavedClasses(filteredSavedClasses)
+  }
+
+  useEffect(() => {
+    if (savedClasses.includes(name)) setClassIsSaved(true)
+    else setClassIsSaved(false)
+  }, [name, savedClasses])
 
   return (
     <>
       <Header />
       <main className="flex flex-col gap-8 max-w-screen-sm mx-auto p-8">
-        <Hour hour={hour} setHour={(e) => setHour(+e.target.value)} />
+        <ValuePerHour hour={hour} setHour={(e) => setHour(+e.target.value)} />
 
         <AddClass
-          name={name}
+          classNameInput={
+            <ClassName
+              name={name}
+              setName={(e) => setName(e.target.value)}
+              savedClasses={savedClasses}
+              saveClassToggle={saveClassToggle}
+              classIsSaved={classIsSaved}
+            />
+          }
           quantity={quantity}
           duration={duration}
-          setName={(e) => setName(e.target.value)}
-          setQuantity={(e) => handleInputChange(e, setQuantity)}
-          setDuration={(e) => handleInputChange(e, setDuration)}
+          setQuantity={(e) => handleNumberInputChange(e, setQuantity)}
+          setDuration={(e) => handleNumberInputChange(e, setDuration)}
           handleSubmit={addClass}
         />
 
-        <Classes classes={classes} hour={hour} removeClass={removeClass} />
+        <Classes
+          classes={classes}
+          hour={hour}
+          removeClass={removeClass}
+          deleteAllClasses={() => setClasses([])}
+        />
       </main>
       <ToastContainer />
     </>

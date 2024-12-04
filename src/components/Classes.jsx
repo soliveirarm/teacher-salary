@@ -1,7 +1,9 @@
 import { Class } from "./Class"
 import { Title } from "./Title"
 
-export function Classes({ classes, hour, removeClass }) {
+import { MdDelete } from "react-icons/md"
+
+export function Classes({ classes, hour, removeClass, deleteAllClasses }) {
   const TOTAL_MINUTES = classes.reduce(
     (acc, { duration, quantity }) => acc + duration * quantity,
     0
@@ -17,7 +19,15 @@ export function Classes({ classes, hour, removeClass }) {
 
   return (
     <section className="flex flex-col gap-2">
-      <Title title="Aulas" />
+      <div className="flex justify-between items-center">
+        <Title title="Aulas" />
+        <button
+          onClick={deleteAllClasses}
+          className="flex gap-2 items-center text-red-500 font-medium rounded transition p-2 hover:bg-red-500 hover:text-white"
+        >
+          <MdDelete className="text-2xl" /> Limpar tudo
+        </button>
+      </div>
       {renderedClasses}
       <Total minutes={TOTAL_MINUTES} hours={TOTAL_HOURS} />
       <Salary salary={SALARY} />
