@@ -6,11 +6,11 @@ const toastProperties = {
   autoClose: 1500,
 }
 
-const classAddedToast = () => {
+const classCreatedToast = () => {
   toast.success("Turma adicionada!", toastProperties)
 }
-const classNotAddedToast = () => {
+const classNotCreatedToast = () => {
   toast.error("Preencha todos os campos!", toastProperties)
 }
 
-export { classAddedToast, classNotAddedToast }
+export { classCreatedToast, classNotCreatedToast }

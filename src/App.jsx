@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import { AddClass } from "./components/AddClass"
+import { CreateClass } from "./components/CreateClass"
 import { Header } from "./components/Header"
 import { ValuePerHour } from "./components/ValuePerHour"
 import { Classes } from "./components/Classes"
@@ -10,13 +10,13 @@ import { useLocalStorage } from "@uidotdev/usehooks"
 
 import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer } from "react-toastify"
-import { classAddedToast, classNotAddedToast } from "./toastify"
+import { classCreatedToast, classNotCreatedToast } from "./toastify"
 
 export function App() {
   const [classes, setClasses] = useLocalStorage("TS_CLASSES", [])
   const [hour, setHour] = useLocalStorage("TS_HOUR", 30)
-  const [savedClasses, setSavedClasses] = useLocalStorage(
-    "TS_SAVED_CLASSES",
+  const [favoriteClasses, setFavoriteClasses] = useLocalStorage(
+    "TS_FAVORITE_CLASSES",
     []
   )
 
@@ -24,9 +24,9 @@ export function App() {
   const [quantity, setQuantity] = useState(0)
   const [duration, setDuration] = useState(0)
 
-  const [classIsSaved, setClassIsSaved] = useState(false)
+  const [isClassSaved, setClassIsSaved] = useState(false)
 
-  const addClass = (e) => {
+  const createClass = (e) => {
     e.preventDefault()
 
     if (name && duration && quantity) {
@@ -35,38 +35,36 @@ export function App() {
       setQuantity(0)
       setDuration(0)
       window.navigator.vibrate(50)
-      classAddedToast()
-    } else {
-      classNotAddedToast()
-    }
+      classCreatedToast()
+    } else classNotCreatedToast()
   }
 
-  const removeClass = (i) => {
-    const newArray = classes.filter((_item, index) => index !== i)
-    setClasses(newArray)
+  const deleteClass = (i) => {
+    const updatedArrayy = classes.filter((_item, index) => index !== i)
+    setClasses(updatedArrayy)
   }
 
   const handleNumberInputChange = (e, setFunc) => {
     const value = +e.target.value
-    if (isNaN(value)) setFunc(0)
-    else setFunc(value)
+    isNaN(value) ? setFunc(0) : setFunc(value)
   }
 
-  const saveClassToggle = () => {
+  const createFavoriteClass = () => {
     if (!name) return
+    setFavoriteClasses([...favoriteClasses, name])
+  }
 
-    const filteredSavedClasses = savedClasses.filter(
+  const removeFavoriteClass = () => {
+    const updatedSavedClasses = favoriteClasses.filter(
       (savedClass) => savedClass !== name
     )
-
-    if (!classIsSaved) setSavedClasses([...savedClasses, name])
-    else setSavedClasses(filteredSavedClasses)
+    setFavoriteClasses(updatedSavedClasses)
   }
 
   useEffect(() => {
-    if (savedClasses.includes(name)) setClassIsSaved(true)
+    if (favoriteClasses.includes(name)) setClassIsSaved(true)
     else setClassIsSaved(false)
-  }, [name, savedClasses])
+  }, [name, favoriteClasses])
 
   return (
     <>
@@ -74,27 +72,29 @@ export function App() {
       <main className="flex flex-col gap-8 max-w-screen-sm mx-auto p-8">
         <ValuePerHour hour={hour} setHour={(e) => setHour(+e.target.value)} />
 
-        <AddClass
+        <CreateClass
           classNameInput={
             <ClassName
               name={name}
               setName={(e) => setName(e.target.value)}
-              savedClasses={savedClasses}
-              saveClassToggle={saveClassToggle}
-              classIsSaved={classIsSaved}
+              favoriteClasses={favoriteClasses}
+              createOrRemoveFavoriteClass={
+                isClassSaved ? removeFavoriteClass : createFavoriteClass
+              }
+              isClassSaved={isClassSaved}
             />
           }
           quantity={quantity}
           duration={duration}
           setQuantity={(e) => handleNumberInputChange(e, setQuantity)}
           setDuration={(e) => handleNumberInputChange(e, setDuration)}
-          handleSubmit={addClass}
+          handleSubmit={createClass}
         />
 
         <Classes
           classes={classes}
           hour={hour}
-          removeClass={removeClass}
+          deleteClass={deleteClass}
           deleteAllClasses={() => setClasses([])}
         />
       </main>

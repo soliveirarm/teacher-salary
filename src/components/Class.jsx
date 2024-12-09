@@ -1,6 +1,6 @@
 import { RxCross2 } from "react-icons/rx"
 
-export function Class({ name, duration, quantity, removeClass }) {
+export function Class({ name, duration, quantity, deleteClass }) {
   const totalMinutes = duration * quantity
 
   return (
@@ -12,7 +12,7 @@ export function Class({ name, duration, quantity, removeClass }) {
         {duration}m x {quantity}
       </span>
       <span className=" sm:w-24">{totalMinutes}m</span>
-      <button onClick={removeClass}>
+      <button onClick={deleteClass}>
         <RxCross2 className="text-red-500" size={20} />
       </button>
     </div>

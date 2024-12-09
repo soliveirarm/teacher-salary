@@ -3,9 +3,9 @@ import { MdSave, MdOutlineSave } from "react-icons/md"
 export function ClassName({
   name,
   setName,
-  savedClasses,
-  classIsSaved,
-  saveClassToggle,
+  favoriteClasses,
+  isClassSaved,
+  createOrRemoveFavoriteClass,
 }) {
   return (
     <>
@@ -15,10 +15,10 @@ export function ClassName({
       <div className="flex gap-4 items-center">
         <button
           type="button"
-          onClick={saveClassToggle}
+          onClick={createOrRemoveFavoriteClass}
           className="text-sky-500 text-2xl"
         >
-          {classIsSaved ? <MdSave /> : <MdOutlineSave />}
+          {isClassSaved ? <MdSave /> : <MdOutlineSave />}
         </button>
         <input
           id="class-input"
@@ -26,14 +26,14 @@ export function ClassName({
           value={name}
           onChange={setName}
           className="input flex-1"
-          list="saved-classes"
+          list="favorite-classes"
         />
       </div>
-      {savedClasses && (
-        <datalist id="saved-classes">
-          {savedClasses.map((savedClass, i) => (
-            <option key={i} value={savedClass}>
-              {savedClass}
+      {favoriteClasses && (
+        <datalist id="favorite-classes">
+          {favoriteClasses.map((favoriteClass, i) => (
+            <option key={i} value={favoriteClass}>
+              {favoriteClass}
             </option>
           ))}
         </datalist>

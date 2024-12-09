@@ -3,7 +3,7 @@ import { Title } from "./Title"
 
 import { MdDelete } from "react-icons/md"
 
-export function Classes({ classes, hour, removeClass, deleteAllClasses }) {
+export function Classes({ classes, hour, deleteClass, deleteAllClasses }) {
   const TOTAL_MINUTES = classes.reduce(
     (acc, { duration, quantity }) => acc + duration * quantity,
     0
@@ -12,7 +12,7 @@ export function Classes({ classes, hour, removeClass, deleteAllClasses }) {
   const SALARY = (TOTAL_HOURS * hour).toFixed(2)
 
   const renderedClasses = classes.map((classItem, i) => (
-    <Class key={i} {...classItem} removeClass={() => removeClass(i)} />
+    <Class key={i} {...classItem} deleteClass={() => deleteClass(i)} />
   ))
 
   if (!classes.length) return <NoClasses />
