@@ -10,7 +10,7 @@ import { useLocalStorage } from "@uidotdev/usehooks"
 
 import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer } from "react-toastify"
-import { classCreatedToast, classNotCreatedToast } from "./toastify"
+import { classCreatedToast, classNotCreatedToast } from "./js/toastify"
 
 export function App() {
   const [classes, setClasses] = useLocalStorage("TS_CLASSES", [])

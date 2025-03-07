@@ -1,9 +1,9 @@
+import Label from "./reusable/Label"
+
 export function ValuePerHour({ hour, setHour }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-medium text-slate-600" htmlFor="hour">
-        Hora/Aula
-      </label>
+      <Label text="Hora/Aula" htmlFor="hour" />
       <input
         id="hour"
         name="hour"

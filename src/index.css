@@ -1,18 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 @import "tailwindcss";
 
 * {
-  font-family: Inter, sans-serif;
+  font-family: Manrope, sans-serif;
 }
 
 #root {
-  @apply bg-gradient-to-br from-white to-slate-50 min-h-screen;
+  @apply bg-zinc-900 text-white min-h-screen;
 }
 
 .center {
   @apply justify-center items-center;
 }
 
-.input,
-.select {
-  @apply p-2 bg-transparent border-b-2 border-sky-500 rounded shadow-md outline-none focus:border-none focus:ring-2 focus:ring-sky-500;
+.input {
+  @apply p-2 bg-zinc-800/40 border-b-2 border-sky-400 rounded shadow-md outline-none focus:border-none focus:ring-2 focus:ring-sky-400;
+}
+
+button {
+  cursor: pointer;
 }

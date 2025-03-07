@@ -1,7 +1,7 @@
 import { Class } from "./Class"
-import { Title } from "./Title"
+import { Title } from "./reusable/Title"
 
-import { MdDelete } from "react-icons/md"
+import { FaTrashCan } from "react-icons/fa6"
 
 export function Classes({ classes, hour, deleteClass, deleteAllClasses }) {
   const TOTAL_MINUTES = classes.reduce(
@@ -15,7 +15,8 @@ export function Classes({ classes, hour, deleteClass, deleteAllClasses }) {
     <Class key={i} {...classItem} deleteClass={() => deleteClass(i)} />
   ))
 
-  if (!classes.length) return <NoClasses />
+  if (!classes.length)
+    return <p className="text-slate-400 text-center">Nenhuma aula adicionada</p>
 
   return (
     <section className="flex flex-col gap-2">
@@ -23,9 +24,9 @@ export function Classes({ classes, hour, deleteClass, deleteAllClasses }) {
         <Title title="Aulas" />
         <button
           onClick={deleteAllClasses}
-          className="flex gap-2 items-center text-red-500 font-medium rounded transition p-2 hover:bg-red-500 hover:text-white"
+          className="flex gap-2 items-center text-red-400 font-medium rounded transition p-2 hover:bg-red-400 hover:text-black"
         >
-          <MdDelete className="text-2xl" /> Limpar tudo
+          <FaTrashCan /> Limpar tudo
         </button>
       </div>
       {renderedClasses}
@@ -35,18 +36,14 @@ export function Classes({ classes, hour, deleteClass, deleteAllClasses }) {
   )
 }
 
-const NoClasses = () => (
-  <p className="text-slate-600 text-center">Nenhuma aula adicionada</p>
-)
-
 const Total = ({ minutes, hours }) => (
-  <p className="text-lg font-semibold self-end mt-4">
+  <p className="text-lg text-slate-200 font-medium self-end mt-4">
     Total: {minutes}m = {hours.toFixed(2)}h
   </p>
 )
 
 const Salary = ({ salary }) => (
-  <p className="text-xl font-bold self-end">
-    Salário: <span className="text-green-600">R${salary}</span>
+  <p className="text-xl text-slate-200 font-bold self-end">
+    Salário: <span className="text-emerald-400">R${salary}</span>
   </p>
 )

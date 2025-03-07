@@ -1,4 +1,5 @@
-import { MdSave, MdOutlineSave } from "react-icons/md"
+import Label from "./reusable/Label"
+import { FaRegStar, FaStar } from "react-icons/fa"
 
 export function ClassName({
   name,
@@ -9,16 +10,14 @@ export function ClassName({
 }) {
   return (
     <>
-      <label htmlFor="class-input" className="font-medium text-slate-600">
-        Turma:
-      </label>
+      <Label htmlFor="class-input" text="Turma:" />
       <div className="flex gap-4 items-center">
         <button
           type="button"
           onClick={createOrRemoveFavoriteClass}
           className="text-sky-500 text-2xl"
         >
-          {isClassSaved ? <MdSave /> : <MdOutlineSave />}
+          {isClassSaved ? <FaStar /> : <FaRegStar />}
         </button>
         <input
           id="class-input"

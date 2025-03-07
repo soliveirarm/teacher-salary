@@ -1,6 +1,7 @@
 import { Input } from "./Input"
-import { Title } from "./Title"
-import { RxPlusCircled } from "react-icons/rx"
+import { Title } from "./reusable/Title"
+
+import { FaCirclePlus } from "react-icons/fa6"
 
 export function CreateClass({
   quantity,
@@ -37,8 +38,8 @@ export function CreateClass({
 }
 
 const CreateClassBtn = () => (
-  <button className="flex center font-semibold gap-2 rounded py-2 px-8 transition hover:scale-105 bg-sky-500 text-white hover:ring-2 hover:text-sky-500 hover:ring-sky-500 hover:bg-slate-50">
-    <RxPlusCircled size={28} />
+  <button className="flex center font-semibold gap-2 rounded py-2 px-8 transition bg-sky-500 text-white hover:ring-2 hover:ring-sky-500 hover:bg-sky-600">
+    <FaCirclePlus />
     <span>Adicionar</span>
   </button>
 )

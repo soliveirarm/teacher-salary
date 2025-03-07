@@ -4,6 +4,8 @@ const toastProperties = {
   toastId: 0,
   position: "bottom-center",
   autoClose: 1500,
+  theme: "dark",
+  className: "bg-red-800",
 }
 
 const classCreatedToast = () => {
