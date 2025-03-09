@@ -1,6 +1,6 @@
-import Label from "./reusable/Label"
+import Label from "./Label"
 
-export function ValuePerHour({ hour, setHour }) {
+function ValuePerHour({ hour, setHour }) {
   return (
     <div className="flex flex-col gap-2">
       <Label text="Hora/Aula" htmlFor="hour" />
@@ -10,8 +10,10 @@ export function ValuePerHour({ hour, setHour }) {
         className="input"
         type="text"
         value={hour}
-        onChange={setHour}
+        onChange={(e) => setHour(+e.target.value)}
       />
     </div>
   )
 }
+
+export default ValuePerHour

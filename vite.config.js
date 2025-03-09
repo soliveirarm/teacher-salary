@@ -41,8 +41,8 @@ export default defineConfig({
         ],
         start_url: "/",
         display: "standalone",
-        background_color: "#f8fafc",
-        theme_color: "#3B82F6",
+        background_color: "#18181b",
+        theme_color: "#38bdf8",
         description:
           "App criado pra calcular o salário de professores de acordo com a hora aula",
       },

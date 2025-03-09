@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+@import "tailwindcss";
+
+* {
+  font-family: Manrope, sans-serif;
+}
+
+body {
+  @apply bg-zinc-900 text-white;
+}
+
+#app {
+  @apply min-h-screen max-w-screen-sm mx-auto p-8;
+}
+
+.center {
+  @apply justify-center items-center;
+}
+
+.input {
+  @apply p-2 bg-zinc-800/40 border-b-2 border-sky-400 rounded shadow-md outline-none focus:border-none focus:ring focus:ring-sky-400;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply bg-zinc-800/20 w-1.5;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-sky-500 rounded;
+}

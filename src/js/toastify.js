@@ -1,18 +1,26 @@
 import { toast } from "react-toastify"
 
-const toastProperties = {
+const toastProps = {
   toastId: 0,
   position: "bottom-center",
   autoClose: 1500,
   theme: "dark",
-  className: "bg-red-800",
 }
 
 const classCreatedToast = () => {
-  toast.success("Turma adicionada!", toastProperties)
+  toast.success("Turma adicionada!", toastProps)
 }
 const classNotCreatedToast = () => {
-  toast.error("Preencha todos os campos!", toastProperties)
+  toast.error("Preencha todos os campos!", toastProps)
 }
 
-export { classCreatedToast, classNotCreatedToast }
+const createFavoriteClassWarnings = {
+  classNameWarning: () => {
+    toast.warning("Você não deu um nome para a turma!", toastProps)
+  },
+  durationWarning: () => {
+    toast.warning("Você esqueceu da duração da aula!", toastProps)
+  },
+}
+
+export { classCreatedToast, classNotCreatedToast, createFavoriteClassWarnings }

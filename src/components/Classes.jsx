@@ -1,9 +1,9 @@
-import { Class } from "./Class"
-import { Title } from "./reusable/Title"
+import Class from "./Class"
+import Title from "./Title"
 
 import { FaTrashCan } from "react-icons/fa6"
 
-export function Classes({ classes, hour, deleteClass, deleteAllClasses }) {
+function Classes({ classes, hour, deleteClass, deleteAllClasses }) {
   const TOTAL_MINUTES = classes.reduce(
     (acc, { duration, quantity }) => acc + duration * quantity,
     0
@@ -47,3 +47,5 @@ const Salary = ({ salary }) => (
     Salário: <span className="text-emerald-400">R${salary}</span>
   </p>
 )
+
+export default Classes

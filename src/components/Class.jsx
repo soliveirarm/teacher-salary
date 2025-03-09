@@ -1,10 +1,10 @@
 import { FaXmark } from "react-icons/fa6"
 
-export function Class({ name, duration, quantity, deleteClass }) {
+function Class({ name, duration, quantity, deleteClass }) {
   const totalMinutes = duration * quantity
 
   return (
-    <div className="flex justify-between items-center gap-4 bg-sky-800/20 p-3 rounded border border-sky-900/80">
+    <div className="flex justify-between items-center gap-4 bg-sky-900/10 p-3 rounded border border-sky-700/90">
       <span className="capitalize font-semibold text-sky-400 sm:w-28">
         {name}
       </span>
@@ -18,3 +18,5 @@ export function Class({ name, duration, quantity, deleteClass }) {
     </div>
   )
 }
+
+export default Class

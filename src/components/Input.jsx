@@ -1,13 +1,12 @@
-export function Input({ label, id, placeholder, value, onChange }) {
+import Label from "./Label"
+
+function Input({ label, id, value, onChange }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-medium text-slate-400" htmlFor={id}>
-        {label}
-      </label>
+      <Label text={label} htmlFor={id} />
       <input
         name={id}
         id={id}
-        placeholder={placeholder}
         className="input"
         value={value}
         onChange={onChange}
@@ -15,3 +14,5 @@ export function Input({ label, id, placeholder, value, onChange }) {
     </div>
   )
 }
+
+export default Input

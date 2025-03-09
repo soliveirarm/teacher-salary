@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react"
 
-import { CreateClass } from "./components/CreateClass"
-import { Header } from "./components/Header"
-import { ValuePerHour } from "./components/ValuePerHour"
-import { Classes } from "./components/Classes"
-import { ClassName } from "./components/ClassName"
+import CreateClass from "./components/CreateClass"
+import ValuePerHour from "./components/ValuePerHour"
+import Classes from "./components/Classes"
+import ClassLevel from "./components/ClassLevel"
+import Title from "./components/Title"
+import Input from "./components/Input"
+import FavoriteClass from "./components/FavoriteClass"
 
 import { useLocalStorage } from "@uidotdev/usehooks"
 
 import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer } from "react-toastify"
-import { classCreatedToast, classNotCreatedToast } from "./js/toastify"
+import {
+  classCreatedToast,
+  classNotCreatedToast,
+  createFavoriteClassWarnings,
+} from "./js/toastify"
 
-export function App() {
+function App() {
   const [classes, setClasses] = useLocalStorage("TS_CLASSES", [])
   const [hour, setHour] = useLocalStorage("TS_HOUR", 30)
   const [favoriteClasses, setFavoriteClasses] = useLocalStorage(
@@ -24,72 +30,124 @@ export function App() {
   const [quantity, setQuantity] = useState(0)
   const [duration, setDuration] = useState(0)
 
-  const [isClassSaved, setClassIsSaved] = useState(false)
+  const [isClassSaved, setIsClassSaved] = useState(false)
+
+  const clearAllFields = () => {
+    setName("")
+    setQuantity(0)
+    setDuration(0)
+  }
 
   const createClass = (e) => {
     e.preventDefault()
 
     if (name && duration && quantity) {
       setClasses([...classes, { name, duration, quantity }])
-      setName("")
-      setQuantity(0)
-      setDuration(0)
+      clearAllFields()
       window.navigator.vibrate(50)
       classCreatedToast()
     } else classNotCreatedToast()
   }
 
   const deleteClass = (i) => {
-    const updatedArrayy = classes.filter((_item, index) => index !== i)
-    setClasses(updatedArrayy)
+    const newClasses = classes.filter((_item, index) => index !== i)
+    setClasses(newClasses)
   }
 
-  const handleNumberInputChange = (e, setFunc) => {
+  const handleInputValue = (e, setFunc) => {
     const value = +e.target.value
     isNaN(value) ? setFunc(0) : setFunc(value)
   }
 
   const createFavoriteClass = () => {
-    if (!name) return
-    setFavoriteClasses([...favoriteClasses, name])
+    const { classNameWarning, durationWarning } = createFavoriteClassWarnings
+    if (!name) {
+      classNameWarning()
+      return
+    }
+    if (!duration) {
+      durationWarning()
+      return
+    }
+    setFavoriteClasses([...favoriteClasses, { name, duration }])
   }
 
-  const removeFavoriteClass = () => {
-    const updatedSavedClasses = favoriteClasses.filter(
-      (savedClass) => savedClass !== name
-    )
-    setFavoriteClasses(updatedSavedClasses)
+  const deleteFavoriteClass = () => {
+    const newFavoriteClasses = favoriteClasses.filter((favClass) => {
+      return favClass.name !== name && favClass.duration !== duration
+    })
+    setFavoriteClasses(newFavoriteClasses)
+    clearAllFields()
   }
 
+  const toggleFavoriteClass = isClassSaved
+    ? deleteFavoriteClass
+    : createFavoriteClass
+
+  const getFavoriteClass = (i) => {
+    const { name, duration } = favoriteClasses[i]
+    setName(name)
+    setDuration(duration)
+  }
+
+  const favoritesIsNotEmpty = favoriteClasses.length !== 0
+
+  const renderedFavoriteClasses = favoriteClasses.map(({ name }, i) => (
+    <FavoriteClass onClick={() => getFavoriteClass(i)} name={name} key={i} />
+  ))
+
+  // Changes the star icon to outlined or filled depending on the text on name and duration
   useEffect(() => {
-    if (favoriteClasses.includes(name)) setClassIsSaved(true)
-    else setClassIsSaved(false)
-  }, [name, favoriteClasses])
+    const classIsAFavorite = favoriteClasses.some(
+      (e) => e.name === name && e.duration === duration
+    )
+    if (classIsAFavorite) setIsClassSaved(true)
+    else setIsClassSaved(false)
+  }, [name, duration, favoriteClasses])
 
   return (
     <>
-      <Header />
-      <main className="flex flex-col gap-8 max-w-screen-sm mx-auto p-8">
-        <ValuePerHour hour={hour} setHour={(e) => setHour(+e.target.value)} />
+      <header className="bg-zinc-800/20 py-2 mb-4">
+        <h1 className="text-2xl text-sky-400 font-bold">Teacher Salary</h1>
+      </header>
 
-        <CreateClass
-          classNameInput={
-            <ClassName
+      <main className="flex flex-col gap-8">
+        <ValuePerHour hour={hour} setHour={setHour} />
+
+        <div>
+          <Title title="Adicionar aula" />
+
+          <form
+            onSubmit={createClass}
+            className="flex flex-col flex-wrap gap-4"
+          >
+            <ClassLevel
               name={name}
-              setName={(e) => setName(e.target.value)}
+              setName={setName}
               favoriteClasses={favoriteClasses}
-              createOrRemoveFavoriteClass={
-                isClassSaved ? removeFavoriteClass : createFavoriteClass
-              }
+              toggleFavoriteClass={toggleFavoriteClass}
               isClassSaved={isClassSaved}
             />
-          }
-          quantity={quantity}
-          duration={duration}
-          setQuantity={(e) => handleNumberInputChange(e, setQuantity)}
-          setDuration={(e) => handleNumberInputChange(e, setDuration)}
-          handleSubmit={createClass}
-        />
+            {favoritesIsNotEmpty && (
+              <div className="flex flex-wrap gap-2 py-2">
+                {renderedFavoriteClasses}
+              </div>
+            )}
+            <Input
+              label="Duração (min)"
+              id="class-duration"
+              value={duration}
+              onChange={(e) => handleInputValue(e, setDuration)}
+            />
+            <Input
+              label="Quantidade de Aulas"
+              id="class-quantity"
+              value={quantity}
+              onChange={(e) => handleInputValue(e, setQuantity)}
+            />
+            <CreateClass />
+          </form>
+        </div>
 
         <Classes
           classes={classes}
@@ -98,7 +156,10 @@ export function App() {
           deleteAllClasses={() => setClasses([])}
         />
       </main>
+
       <ToastContainer />
     </>
   )
 }
+
+export default App
